@@ -34,9 +34,15 @@ class Room
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="roomId")
+     */
+    private $reservations;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,6 +99,37 @@ class Room
             // set the owning side to null (unless already changed)
             if ($image->getRoomId() === $this) {
                 $image->setRoomId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setRoomId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->contains($reservation)) {
+            $this->reservations->removeElement($reservation);
+            // set the owning side to null (unless already changed)
+            if ($reservation->getRoomId() === $this) {
+                $reservation->setRoomId(null);
             }
         }
 
