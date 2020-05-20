@@ -15,9 +15,11 @@
                     {% if app.user %}
                         <a href="#" class="nav-link dropdown-toggle" id="navbar-user" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Signed in as {{ app.user.name }}
+                            Signed in as {{ app.user.firstName }} {{ app.user.lastName }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbar-user">
+                            <a href="javascript:void(0)" class="dropdown-item">Reservations</a>
+                            <a href="javascript:void(0)" class="dropdown-item">Account details</a>
                             <a href="{{ path('app_logout') }}" class="dropdown-item">Logout</a>
                         </div>
                     {% else %}
