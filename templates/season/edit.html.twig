@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Season{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Create new Season</h1>
+    </div>
+</div>
+<div class="container my-4">
+    <h1>Edit Season</h1>
+
+    {{ include('season/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('season_index') }}">back to list</a>
+
+    {{ include('season/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Season index{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Season index</h1>
+    </div>
+</div>
+<div class="container my-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Start_date</th>
+                <th>End_date</th>
+                <th>Discount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for season in seasons %}
+            <tr>
+                <td>{{ season.id }}</td>
+                <td>{{ season.description }}</td>
+                <td>{{ season.startDate ? season.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ season.endDate ? season.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ season.discount }}</td>
+                <td>
+                    <a href="{{ path('season_show', {'id': season.id}) }}">show</a>
+                    <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('season_new') }}">Create new</a>
+</div>
+{% endblock %}
